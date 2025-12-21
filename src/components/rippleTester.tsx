@@ -1,4 +1,4 @@
-import { RippleContainer } from '@m_three_ui/m3ripple';
+import { RippleContainer } from 'sparkle-ripple';
 import { useState } from 'react';
 import { useReward } from 'react-rewards';
 import styles from './rippleTester.module.css';
@@ -22,10 +22,8 @@ const rippleTester = () => {
           sparklesColorRGB="255 255 255"
           opacity_level1="0.4"
           opacity_level2="0.1"
-          divProps={{
-            onClick: () => {
-              if (isConfettiEnabled) reward();
-            },
+          onClick={() => {
+            if (isConfettiEnabled) reward();
           }}
         >
           <span className={styles.componentName}>

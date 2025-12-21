@@ -6,40 +6,43 @@ desc: Install, using
 group: use
 order: 0
 ---
-import { RippleContainer } from "@m_three_ui/m3ripple"
+import { RippleContainer } from "sparkle-ripple"
 import { Code } from 'astro:components';
 
 ## Getting Started
 ### Install
 #### Bun
 ```bash
-bun install @m_three_ui/m3ripple
+bun install sparkle-ripple
 ```
 #### Others
 <details>
   <summary><RippleContainer className="rcon" client:visible>npm</RippleContainer></summary>
-  <Code code={`npm i @m_three_ui/m3ripple`} lang="bash" theme="gruvbox-dark-soft"/>
+  <Code code={`npm i sparkle-ripple`} lang="bash" theme="gruvbox-dark-soft"/>
 </details>
 <details>
   <summary><RippleContainer className="rcon" client:visible>pnpm</RippleContainer></summary>
-  <Code code={`pnpm add @m_three_ui/m3ripple`} lang="bash" theme="gruvbox-dark-soft"/>
+  <Code code={`pnpm add sparkle-ripple`} lang="bash" theme="gruvbox-dark-soft"/>
 </details>
 <details>
   <summary><RippleContainer className="rcon" client:visible>Yarn</RippleContainer></summary>
-  <Code code={`yarn add @m_three_ui/m3ripple`} lang="bash" theme="gruvbox-dark-soft"/>
+  <Code code={`yarn add sparkle-ripple`} lang="bash" theme="gruvbox-dark-soft"/>
 </details>
 
 ### Use
-Import `<RippleContainer>` component(based on `<div />`) and set props.
+Import `<RippleContainer>` component(by default, it's rendered as `<div />`) and set props.
 
 #### Example
 ```tsx
-import { RippleContainer } from '@m_three_ui/m3ripple'; //import it
+import { RippleContainer } from 'sparkle-ripple'; //import it
+import 'sparkle-ripple/css' // import css
+
 import styles from './some_css_file.module.css';
 
 const YourComponent = () => {
   return (
     <RippleContainer
+      as = 'div'
       isMaterial3 = {true}
       beforeRippleFn = {(event) =>{}}
       className = {styles.rippleContainer}
@@ -48,14 +51,6 @@ const YourComponent = () => {
       opacity_level1 = "0.4"
       opacity_level2 = "0.1"
       sparklesMaxCount = 2048
-      divProps = {{}}
-      onMouseDown = {() => {}}
-      onTouchStart = {() => {}}
-      onTouchMove = {() => {}}
-      onMouseUp = {() => {}}
-      onTouchEnd = {() => {}}
-      onMouseLeave = {() => {}}
-      onTouchCancel = {() => {}}
     >
       <div className={styles.children} />
     </RippleContainer>
@@ -67,78 +62,36 @@ export default YourComponent;
 <div style="overflow-x:auto;" align="center">
 |Property|optional|explanation|default|type|
 |----|----|----|----|----|
-|`isMaterial3`|yes|Whether to use ripple of Material 3|`true`|`boolean`|
-|`beforeRippleFn`|yes|A function to be executed when a click occurs and just before the ripple is displayed (used for example to display a button shadow)|`()=>{}`|`(event: React.MouseEvent \| React.TouchEvent) => void`|
-|`className`|yes|Since RippleContainer is rendered as a div element, this is the ClassName of that div element.|`""`|`string`|
-|`children`|yes|Child Elements of RippleContainer|`undefined`|`ReactNode`|
+|`as`|yes|What element is RippleContainer rendered as.|`"div"`|`ElementType`|
+|`isMaterial3`|yes|Whether to use ripple of Material 3.|`true`|`boolean`|
+|`beforeRippleFn`|yes|A function to be executed when a click occurs and just before the ripple is displayed (used for example to display a button shadow).|`()=>{}`|`(event: React.MouseEvent \| React.TouchEvent) => void`|
+|`className`|yes|Since RippleContainer is rendered as the element which is selected by `as` property, this is the ClassName of that element.|`""`|`string`|
+|`children`|yes|Child Elements of RippleContainer.|`undefined`|`ReactNode`|
 |`rippleColor`|yes|Ripple Effect Colors. If transparency is not specified, the overlap will not be visible when multiple clicks are made.|`"#ffffff35"`|`string`|
 |`sparklesColorRGB`|yes|Specify sparkle color as space-separated RGB. Transparency cannot be specified.|`"255 255 255"`|`string`|
-|`opacity_level1`|yes|Transparency just before the sparkle disappears. *The transparency when initially displayed is calculated by the current progress of the Ripple Effect|`"0.2"`|`string`|
-|`opacity_level2`|yes|Transparency just before Sparkles disappear.Set after opacity_level1.|`"0.1"`|`string`|
+|`opacity_level1`|yes|Transparency just before the sparkle disappears. \*The transparency when initially displayed is calculated by the current progress of the Ripple Effect.|`"0.2"`|`string`|
+|`opacity_level2`|yes|Transparency just before Sparkles disappear.Set after `opacity_level1`.|`"0.1"`|`string`|
 |`sparklesMaxCount`|yes|Total amount of dots representing sparkle.|`2048`|`number`|
-|`divProps`|yes|Since the RippleContainer is rendered as a Div element, you can pass Div element Props.|`{}`|`Omit<ComponentPropsWithoutRef<'div'>, \| 'className' \| 'onMouseDown' \| 'onMouseUp' \| 'onMouseLeave' \| 'onTouchStart' \| 'onTouchMove' \| 'onTouchEnd' \| 'onTouchCancel'>`|
-|`onMouseDown`, `onMouseUp`, `onMouseLeave`, `onTouchStart`, `onTouchMove`, `onTouchEnd`, `onTouchCancel`|yes|Props to handle events without interfering with the Ripple Effect implementation. one function is accepted. *Rather than using this, we recommend wrapping the RippleContainer itself in another HTML element and defining a handler for that element.|`()=>{}`|`(event) => void`|
+|Other Properties|yes|You can set other properties to add to the rendered element. e.g., `href` attribute of the RippleContainer whose rendered as `<a></a>` element.|-|-|
 
 </div>
 
 ## FAQ
 **The Ripple Effect looks broken. The ripple’s width and height seem to affect the layout of the child elements inside `RippleContainer`, as if the ripple doesn’t have `position: absolute`. What’s going on?**\
 \
-This is a known issue. It occurs when the CSS provided by the library fails to apply correctly.\
+This issue occurs when the CSS required to render the ripple effect provided by sparkle-ripple is not loaded.
+You need to explicitly import the CSS from your tsx/jsx file.\
+Alternatively, if you are using plugins such as postcss-import, you may also be able to import it from a CSS file.\
+**Example:**
+```tsx
+import 'sparkle-ripple/css';
+```
+```css
+@import 'sparkle-ripple/css';
+```
+You can also load the CSS globally to avoid having to import it each time.\
+If you are using this library without a bundler, such as via a CDN, you can load the CSS using the @import url() syntax in your CSS.\
 \
-As a workaround, please assign a custom class via the className prop on RippleContainer, and apply the following CSS manually:
-
-```css
-.rippleContainer {
-  /* Workaround(m3ripple's css modules is not working) */
-  overflow: hidden;
-  position: relative;
-  z-index: 0;
-
-  & :global(.ripple) {
-    position: absolute;
-    border-radius: 100%;
-    z-index: -1;
-    transform: translateX(-50%) translateY(-50%);
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-  }
-  & :global(.sparkles_canvas) {
-    position: absolute;
-    user-select: none;
-  }
-}
-```
-This works only in environments where CSS is scoped using something like CSS Modules and supports :global().\
-If you're not using such an environment, please use the following alternative instead.\
-
-```css
-.rippleContainer {
-  /* Workaround(m3ripple's css modules is not working) */
-  overflow: hidden;
-  position: relative;
-  z-index: 0;
-
-  & .ripple {
-    position: absolute;
-    border-radius: 100%;
-    z-index: -1;
-    transform: translateX(-50%) translateY(-50%);
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-  }
-  & .sparkles_canvas {
-    position: absolute;
-    user-select: none;
-  }
-}
-```
 \
 **When I wrap a RippleContainer with the a element, a blue box appears on tap in the mobile version of Chrome and the Ripple Effect is not visible. Is there any way to turn it off?** \
 \

@@ -1,5 +1,5 @@
 ---
-import { RippleContainer } from '@m_three_ui/m3ripple';
+import { RippleContainer } from 'sparkle-ripple';
 import ListLinkItem from '../components/ListLinkItem.tsx';
 ---
 <script>
@@ -31,22 +31,22 @@ document.addEventListener('swup:page:view', pathupdate)
 <div class="top_hero">
     <RippleContainer className="RippleContainer" client:load></RippleContainer>
     <div class="container">
-        <h1>✨ m3ripple</h1>
+        <h1>✨ sparkle-ripple</h1>
         <p>Bring Material 3(You) Ripple Effect to your <b>React</b> projects!</p>
     </div>
 </div>
 <h2>Library</h2>
 <ListLinkItem
     iconifyIcon="simple-icons:github"
-    href="https://github.com/yuyake-litrain/m3ripple"
+    href="https://github.com/yuyake-litrain/sparkle-ripple"
     itemTitle="Github Repository"
-    itemDesc="yuyake-litrain/m3ripple: Bring Material 3(You) Ripple Effect to your React projects!"
+    itemDesc="yuyake-litrain/sparkle-ripple: Bring Material 3(You) Ripple Effect to your React projects!"
     client:visible />
 <ListLinkItem
     iconifyIcon="simple-icons:npm"
-    href="https://www.npmjs.com/package/@m_three_ui/m3ripple"
+    href="https://www.npmjs.com/package/sparkle-ripple"
     itemTitle="NPM Registry"
-    itemDesc="@m_three_ui/m3ripple"
+    itemDesc="sparkle-ripple"
     client:visible />
 <ListLinkItem
     iconifyIcon="material-symbols:person-outline-rounded"
@@ -61,7 +61,7 @@ document.addEventListener('swup:page:view', pathupdate)
     itemDesc="yuyake-litrain (Litrain)"
     client:visible />
 <ListLinkItem
-    href="https://github.com/yuyake-litrain/m3ripple"
+    href="https://github.com/yuyake-litrain/sparkle-ripple"
     itemTitle="Pull Requests/Issues are welcome!"
     client:visible />
 
@@ -114,28 +114,6 @@ a {
     &:active {
         text-decoration: none;
     }
-    & :global(.RippleContainer) {
-      /* Workaround(m3ripple's css modules is not working) */
-      overflow: hidden;
-      position: relative;
-      z-index: 0;
-    
-      & :global(.ripple) {
-        position: absolute;
-        border-radius: 100%;
-        z-index: -1;
-        transform: translateX(-50%) translateY(-50%);
-        pointer-events: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        user-select: none;
-      }
-      & :global(.sparkles_canvas) {
-        position: absolute;
-        user-select: none;
-      }
-    }
 }
 h2 {
     color: #f7ca9a;
@@ -162,27 +140,6 @@ h2 {
     }
     & .container {
         padding: 20px 50px;
-    }
-    & :global(.RippleContainer) {
-      /* Workaround(m3ripple's css modules is not working) */
-      overflow: hidden;
-      z-index: 0;
-    
-      & :global(.ripple) {
-        position: absolute;
-        border-radius: 100%;
-        z-index: -1;
-        transform: translateX(-50%) translateY(-50%);
-        pointer-events: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        user-select: none;
-      }
-      & :global(.sparkles_canvas) {
-        position: absolute;
-        user-select: none;
-      }
     }
 }
 .top_bigIntro {

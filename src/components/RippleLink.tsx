@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import { RippleContainer } from '@m_three_ui/m3ripple';
+import { RippleContainer } from 'sparkle-ripple';
 import clsx from 'clsx';
 import styles from './RippleLink.module.css';
 

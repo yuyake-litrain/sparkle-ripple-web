@@ -1,6 +1,7 @@
 ---
 import Sidebar from '../components/sidebar.astro';
 import '@fontsource-variable/inter';
+import 'sparkle-ripple/css'
 const currentUrl = Astro.url.pathname;
 ---
 <script>
@@ -23,7 +24,7 @@ const pathupdate = ({detail: {visit}}: {detail: any}) => {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>m3ripple demo</title>
+    <title>sparkle-ripple demo</title>
   </head>
   <body>
     <Sidebar />
