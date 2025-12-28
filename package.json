@@ -15,7 +15,7 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/react": "^4.4.2",
     "@fontsource-variable/inter": "^5.2.8",
-    "sparkle-ripple": "^3.0.2",
+    "sparkle-ripple": "^3.0.4",
     "@swup/astro": "^1.7.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
